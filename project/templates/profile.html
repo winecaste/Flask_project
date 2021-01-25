@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+  <body>
+  <div align="left">
+<h1 class="title">
+  Тест
+</h1>
+    <p>
+      {% for message in get_flashed_messages() %}
+        {{ message }}
+      {% endfor %}
+    </p>
+  <style>
+   p {
+    margin-top: 0.5em; 
+    margin-bottom: 1em; 
+   }
+  </style>
+    <form method="POST">
+        {% for p in Вопрос %}
+          <p>
+            {{ p.Вопрос }}
+            <br>
+            {% set pnr = loop.index0 %}
+            {% for o in p.Варианты %}
+              <label>
+                <input type="radio" value="{{ o }}" name="{{ pnr }}">
+                {{ o }}
+              </label>
+              <br>
+            {% endfor %}
+          </p>
+        {% endfor %}
+
+        <button type="submit">Результат</button>
+    </form>
+</div>
+  </body>
+</html>
+{% endblock %}
